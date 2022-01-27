@@ -208,6 +208,7 @@ nav {
   }
   .grid-box {
     grid-template-columns: 1fr 1fr;
+    width: 80%;
   }
   .nav {
     width: 100%;
@@ -233,6 +234,7 @@ nav {
   }
   .grid-box {
     grid-template-columns: 1fr;
+    width: 100%;
   }
   .about-box {
     width: 95%;
