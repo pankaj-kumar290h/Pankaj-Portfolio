@@ -280,9 +280,11 @@ i {
 }
 .git {
   background-color: brown;
+  text-transform: uppercase;
 }
 .live {
   background-color: blue;
+  text-transform: uppercase;
 }
 /* /////////////////////////////////////////////// */
 
