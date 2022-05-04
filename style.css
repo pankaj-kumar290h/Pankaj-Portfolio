@@ -70,7 +70,7 @@ nav {
   position: absolute;
   width: 30rem;
   height: 30rem;
-  background-image: url(./img/p1.jpg);
+  background-image: url(./img/p1.jpeg);
   background-position: center;
   border-radius: 50%;
   top: 50%;
@@ -82,7 +82,7 @@ nav {
 .section-1 {
   min-height: 100vh;
   width: 100%;
-  background-image: url(./img/p1.jpg);
+  background-image: url(./img/p1.jpeg);
   background-position: center;
   background-size: cover;
   position: relative;
