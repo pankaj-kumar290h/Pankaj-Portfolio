@@ -1,290 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Sacramento&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dongle:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" href="./favicon-32x32.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Pankaj Kumar — Full-Stack Developer. React.js, Next.js, TypeScript, Node.js. 3.5+ years shipping production web applications." />
+<link rel="shortcut icon" href="./favicon-32x32.png" type="image/x-icon" />
+<title>Pankaj Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
 
-    <title>Pankaj Kumar</title>
-  </head>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="spotlight" aria-hidden="true"></div>
 
-  <body>
-    <div class="loder-warpper">
-      <div class="loder-text-box"></div>
+<div class="sheet-frame">
+  <span class="reg tl"></span><span class="reg tr"></span><span class="reg bl"></span><span class="reg br"></span>
+
+  <header class="titleblock">
+    <div class="meta-row">
+      <span>SET&nbsp;— PORTFOLIO 001</span>
+      <span>REV 2026.09.07</span>
+      <span>SCALE&nbsp;N.T.S.</span>
     </div>
-    <section class="section-1">
-      <div class="shadow-top"></div>
-      <nav class="nav">
-        <div class="logo">
-          <h1>🦸‍♂️</h1>
-        </div>
-        <div class="nav-links">
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-          <a
-            target="_blank"
-            href="https://1drv.ms/b/s!Al2a94Fgc9Msgg6dmhXQd2gf9apD?e=RxJGLv"
-            >Resume</a
-          >
-        </div>
-      </nav>
-      <div class="hero">
-        <div class="circle"></div>
-        <div class="text">
-          <div class="heading">
-            <h1 class="h1">I'm Pankaj</h1>
-            <!-- <div class="heading-revel"></div> -->
-          </div>
-          <div class="sub-heading">
-            <h3 class="h3">Frontend Developer</h3>
-          </div>
-          <div class="buttons">
-            <a
-              class="link"
-              target="_blank"
-              href="https://1drv.ms/b/s!Al2a94Fgc9Msgg6dmhXQd2gf9apD?e=RxJGLv"
-              >Resume</a
-            >
-            <a class="link" href="#projects">Projects</a>
-          </div>
-        </div>
+    <h1>Pankaj Kumar</h1>
+    <div class="role-line">
+      <span class="role">Full&#8209;Stack Developer</span>
+    </div>
+    <div class="contact-row">
+      <span>Bengaluru, India</span>
+      <a href="tel:+918295007305">+91&nbsp;82950&nbsp;07305</a>
+      <a href="mailto:dev_pankaj@outlook.com">dev_pankaj@outlook.com</a>
+      <a href="https://github.com/pankaj-kumar290h">github.com/pankaj-kumar290h</a>
+    </div>
+    <nav class="index-row" aria-label="Drawing index">
+      <span class="label">Index</span>
+      <a href="#a01">A-01</a><a href="#a02">A-02</a><a href="#a03">A-03</a><a href="#a04">A-04</a><a href="#a05">A-05</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p>Full-Stack Developer with 3.5+ years shipping production web applications used by millions of end-users. Specialized in React.js, Next.js, TypeScript, and Node.js — owning features end-to-end, from architecture through deployment.</p>
       </div>
-      <div class="shadow"></div>
+      <div class="hero-iso">
+        
+        <div class="iso-stage">
+          <canvas id="iso" aria-label="Isometric diagram of a full-stack application: Client/UI, Rendering, API, Data, and Cloud layers stacked top to bottom."></canvas>
+          <div class="iso-labels" aria-hidden="true"></div>
+        </div>
+        <ul class="sr-only">
+          <li>Client / UI — React, Next.js, TypeScript</li>
+          <li>Rendering — Next.js SSG / SSR / ISR, CDN</li>
+          <li>API — Node.js, Express, GraphQL, REST</li>
+          <li>Data — PostgreSQL, Prisma, Supabase</li>
+          <li>Cloud — AWS S3 / EC2, CI/CD, Sentry</li>
+        </ul>
+      </div>
     </section>
-    <div class="about">
-      <h1>About</h1>
-      <div class="about-box">
-        <div class="about-img">
-          <div class="box">
-            <!-- <img src="./img/p2.jpg" alt=""> -->
+
+    <section class="experience">
+      <div class="exp-header">
+        <h2>Experience — Drawing Set A</h2>
+        <div class="company-line"><strong>Software Development Engineer III</strong> · GeekyAnts · 2022 — Present</div>
+      </div>
+
+      <article class="sheet" id="a01">
+        <div class="sheet-num">A-01</div>
+        <div>
+          <h3>Career &amp; EdTech Platform</h3>
+          <div class="items">
+            <div class="item">
+              <h4>Architecture &amp; Headless Integration</h4>
+              <p>Architected a localized Next.js 16 + Strapi headless CMS platform in a pnpm monorepo; used static-site generation to cut initial page-load time to sub-second, and generated strictly-typed GraphQL operations via codegen for end-to-end type safety across 15+ content-driven pages.</p>
+            </div>
+            <div class="item">
+              <h4>Sandboxed Expression Engine</h4>
+              <p>Built a safe, client-side TypeScript expression parser/solver to execute CMS-authored formulas without eval(), preventing XSS while resolving cascading variable dependencies in real time for interactive calculators.</p>
+            </div>
+            <div class="item">
+              <h4>Privacy &amp; Analytics Engineering</h4>
+              <p>Implemented Google Consent Mode v2 for GDPR compliance and built custom form-abandonment tracking with the Page Visibility API, streaming granular drop-off events into GA4 to improve conversion-funnel visibility.</p>
+            </div>
           </div>
         </div>
-        <div class="about-text">
-          <h3>
-            Hi my name is Pankaj Kumar <br />
-            <span class="color-1"> Computer Science Student </span>🦸‍♂️ but Self
-            taught <span class="color-2"> Web Developer</span> 🤷‍♂️
-          </h3>
-          <p>
-            In building
-            <span class="color-3"> React/JavaScript</span> applications, I'm
-            equipped with just the right tools, and can absolutely function
-            independently of them to deliver fast, resilient solutions optimized
-            for performance. Also love playing with
-            <span class="color-1"> CSS & Animation</span>
-          </p>
+      </article>
+
+      <article class="sheet" id="a02">
+        <div class="sheet-num">A-02</div>
+        <div>
+          <h3>Jio Design System</h3>
+          <div class="items">
+            <div class="item">
+              <h4>Component Library at Scale</h4>
+              <p>Maintained a shared component library consumed by 20+ cross-functional teams, cutting new-feature UI development time and enforcing visual/behavioral consistency across products.</p>
+            </div>
+            <div class="item">
+              <h4>Accessibility Standardization</h4>
+              <p>Audited and standardized WCAG 2.1 AA compliance across core components, improving accessibility for an end-user base in the millions and reducing accessibility-related bug reports.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="sheet" id="a03">
+        <div class="sheet-num">A-03</div>
+        <div>
+          <h3>Vending-as-a-Service (VaaS) Platform</h3>
+          <div class="items">
+            <div class="item">
+              <h4>Ground-Up Frontend Architecture</h4>
+              <p>Built a dual-sided marketplace from scratch, supporting both FMCG retail purchases and B2B vending-machine rental management on a single codebase.</p>
+            </div>
+            <div class="item">
+              <h4>Auth &amp; Access Control</h4>
+              <p>Implemented authentication with Clerk and a JWT-based RBAC system to cleanly separate customer and vendor permissions and data access.</p>
+            </div>
+            <div class="item">
+              <h4>State &amp; Data Layer</h4>
+              <p>Used React Query for server-state caching/sync and Supabase (BaaS) for real-time data persistence, reducing redundant network calls and improving perceived performance.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="sheet" id="a04">
+        <div class="sheet-num">A-04</div>
+        <div>
+          <h3>AI Interview Platform</h3>
+          <div class="items">
+            <div class="item">
+              <h4>High-Performance AI Frontend</h4>
+              <p>Engineered a high-performance frontend for an AI-driven recruitment platform, optimizing content processing and low-latency media playback.</p>
+            </div>
+            <div class="item">
+              <h4>Real-Time Audio Streaming</h4>
+              <p>Implemented real-time, low-latency audio streaming by integrating Web Media APIs and WebSockets, improving the responsiveness of AI-user interactions.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="sheet" id="a05">
+        <div class="sheet-num">A-05</div>
+        <div>
+          <h3>Digital Networking Platform</h3>
+          <div class="items">
+            <div class="item">
+              <h4>Full-Stack Ownership</h4>
+              <p>Led end-to-end development with Next.js, PostgreSQL, and Prisma, taking a production-ready MVP from kickoff to launch in 2 months.</p>
+            </div>
+            <div class="item">
+              <h4>Payments Integration</h4>
+              <p>Integrated the Telr payment gateway to enable secure, PCI-conscious transaction processing for end users.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="skills">
+      <h2>Specification Schedule</h2>
+      <div class="schedule">
+        <div class="schedule-row">
+          <div class="cat">Frontend</div>
+          <div class="vals">JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS, React.js, Next.js (SSG/SSR/ISR), Redux Toolkit, React Query, Tailwind CSS</div>
+        </div>
+        <div class="schedule-row">
+          <div class="cat">Backend / Auth</div>
+          <div class="vals">Node.js, Express.js, GraphQL, REST APIs, PostgreSQL, MongoDB, Prisma ORM, Supabase, Strapi CMS, Clerk, JWT/RBAC</div>
+        </div>
+        <div class="schedule-row">
+          <div class="cat">Cloud &amp; Practices</div>
+          <div class="vals">AWS (S3, EC2), Git/GitHub, Webpack, pnpm monorepos, Jest, Sentry, Mixpanel, GA4, CI/CD, Agile</div>
         </div>
       </div>
-    </div>
-    <div class="projects" id="projects">
-      <h1>Projects</h1>
-      <div class="grid-box">
-        <div class="project-box">
-          <div class="icon-box">
-            <!-- <i class="fas fa-film"></i> -->
-            <i class="fas fa-tree"></i>
-          </div>
-          <div class="p-title">
-            <h3>Figma to html</h3>
-          </div>
-          <div class="p-desc">
-            <p>Converting Figma degine to Html and Css</p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="https://github.com/pankaj-kumar290h">git</a>
-            <a
-              class="live"
-              href="https://pankaj-kumar290h.github.io/Trafalgar-leanding-page-project/"
-              >Live</a
-            >
-          </div>
-        </div>
-        <div class="project-box">
-          <div class="icon-box">
-            <i class="fas fa-film"></i>
-          </div>
-          <div class="p-title">
-            <h3>Recipy Search App</h3>
-          </div>
-          <div class="p-desc">
-            <p>
-              Food search App. User can search for recipy and seen the intration
-              to make the recipy
-            </p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="https://github.com/pankaj-kumar290h">git</a>
-            <a
-              class="live"
-              href="https://pankaj-kumar290h.github.io/Recipe-search-react/"
-              >Live</a
-            >
-          </div>
-        </div>
-        <div class="project-box">
-          <div class="icon-box">
-            <i class="fas fa-film"></i>
-          </div>
-          <div class="p-title">
-            <h3>Movies App</h3>
-          </div>
-          <div class="p-desc">
-            <p>
-              Movies Collection. It use TMDB API for fetching data. And you can
-              also watch trailer of movies
-            </p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="https://github.com/pankaj-kumar290h">git</a>
-            <a class="live" href="https://netflix-clone-57a71.web.app/">Live</a>
-          </div>
-        </div>
-        <div class="project-box">
-          <div class="icon-box">
-            <i class="fas fa-images"></i>
-          </div>
-          <div class="p-title">
-            <h3>DayPic</h3>
-          </div>
-          <div class="p-desc">
-            <p>
-              DayPic is website for searching Photo your personal projects.It
-              use Unsplash API
-            </p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="https://github.com/pankaj-kumar290h">git</a>
-            <a class="live" href="https://pankaj-kumar290h.github.io/PicDAY/"
-              >Live</a
-            >
-          </div>
-        </div>
-        <div class="project-box">
-          <div class="icon-box">
-            <i class="fab fa-google"></i>
-          </div>
-          <div class="p-title">
-            <h3>Google Keep</h3>
-          </div>
-          <div class="p-desc">
-            <p>Online Personal Note taking app like Google Keeper</p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="#">git</a>
-            <a class="live" href="#">Live</a>
-          </div>
-        </div>
-        <div class="project-box">
-          <div class="icon-box">
-            <i class="fas fa-tree"></i>
-          </div>
-          <div class="p-title">
-            <h3>Naturos Tours</h3>
-          </div>
-          <div class="p-desc">
-            <p>
-              Company website that offer tours of nature. This website show my
-              CSS skill
-            </p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="https://github.com/pankaj-kumar290h">git</a>
-            <a
-              class="live"
-              href="https://pankaj-kumar290h.github.io/Natours-project/"
-              >Live</a
-            >
-          </div>
-        </div>
-        <div class="project-box">
-          <div class="icon-box">
-            <i class="fas fa-swimmer"></i>
-          </div>
-          <div class="p-title">
-            <h3>Landing Page</h3>
-          </div>
-          <div class="p-desc">
-            <p>
-              I love animation and this landing page mainly show my animation
-              skills.
-            </p>
-          </div>
-          <div class="buttons project-links">
-            <a class="git" href="https://github.com/pankaj-kumar290h">git</a>
-            <a class="live" href="https://pankaj-kumar290h.github.io/Animation/"
-              >Live</a
-            >
-          </div>
-        </div>
-        <!-- <div class="project-box">
-                <div class="icon-box">
-                    <i class="fab fa-google"></i>
-                </div>
-                <div class="p-title">
-                    Google Keep
-                </div>
-                <div class="p-desc">
-                    <p>Online Note taking app like Google Keeper</p>
-                </div>
-                <div class="buttons project-links ">
-                    <a class="git" href="#">git</a>
-                    <a class="live" href="#">Live</a>
+    </section>
 
-                </div>
+  
 
-            </div> -->
-      </div>
-    </div>
-    <div class="contact" id="contact">
-      <h1>Contact</h1>
-      <div class="social-links">
-        <div id="linkdin">
-          <a href="https://www.linkedin.com/in/pankaj-kumar-8a69201b8/">
-            <i class="fab fa-linkedin"></i
-          ></a>
-        </div>
-        <div id="twitter">
-          <a href="https://twitter.com/PankajK19559732">
-            <i class="fab fa-twitter"></i
-          ></a>
-        </div>
-        <div id="github">
-          <a href="https://github.com/pankaj-kumar290h">
-            <i class="fab fa-github"></i
-          ></a>
-        </div>
-        <div id="mail">
-          <a href="#"> <i class="fas fa-envelope-open-text"></i></a>
-        </div>
-      </div>
-    </div>
+    
+  </main>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
-      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <script src="app.js"></script>
-  </body>
+  <footer class="stamp">
+    <span>Drawn by Pankaj Kumar · India</span>
+    
+  </footer>
+</div>
+
+<script type="module" src="./main.js"></script>
+
+</body>
 </html>
