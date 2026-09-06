@@ -106,7 +106,7 @@ h1,h2,h3,h4{
   position:relative;
   z-index:1;
   max-width:980px;
-  margin:0 auto;
+  margin:20px auto;
   padding: clamp(28px,5vw,56px) clamp(20px,6vw,64px) clamp(40px,6vw,64px);
   border:1px solid var(--border);
   background:var(--bg);
