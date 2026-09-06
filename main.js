@@ -151,64 +151,85 @@ const muted  = () => cssColor('--fg-muted', '#4c6883');
   pivot.add(group);
 
   const W = 5, T = 0.32, GAP = 1.7;
-  const topY = (layers.length - 1) * GAP / 2;
-  const botY = topY - (layers.length - 1) * GAP;
+  const n = layers.length;
+  const topY = (n - 1) * GAP / 2;
+
+  const FILL_O = 0.05, EDGE_O = 0.55, CONN_O = 0.4, LEAD_O = 0.6;
 
   const accentMats = [];
   const mutedMats = [];
   const anchors = [];
+  const connectors = [];   // { line, mat, verts, gap }
+  const leaders = [];      // { line, verts }
 
   const slabGeo = new THREE.BoxGeometry(W, T, W);
   const edgeGeo = new THREE.EdgesGeometry(slabGeo);
+  const DROP = new THREE.Vector3(0.7, 5.2, 0.7);   // where a tile flies in from
+
+  const segGeom = (a, b, seg) => {
+    const pts = [];
+    for (let s = 0; s <= seg; s++) pts.push(new THREE.Vector3().lerpVectors(a, b, s / seg));
+    return new THREE.BufferGeometry().setFromPoints(pts);
+  };
 
   layers.forEach((l, i) => {
     const y = topY - i * GAP;
+    l.baseY = y;
 
-    const fillMat = new THREE.MeshBasicMaterial({ color: accent(), transparent: true, opacity: 0.05 });
-    const slab = new THREE.Mesh(slabGeo, fillMat);
-    slab.position.y = y;
-    group.add(slab); accentMats.push(fillMat);
+    const fillMat = new THREE.MeshBasicMaterial({ color: accent(), transparent: true, opacity: 0 });
+    l.slab = new THREE.Mesh(slabGeo, fillMat);
+    group.add(l.slab); accentMats.push(fillMat);
+    l.fillMat = fillMat;
 
-    const edgeMat = new THREE.LineBasicMaterial({ color: accent(), transparent: true, opacity: 0.55 });
-    const edges = new THREE.LineSegments(edgeGeo, edgeMat);
-    edges.position.y = y;
-    group.add(edges); accentMats.push(edgeMat);
+    const edgeMat = new THREE.LineBasicMaterial({ color: accent(), transparent: true, opacity: 0 });
+    l.edges = new THREE.LineSegments(edgeGeo, edgeMat);
+    group.add(l.edges); accentMats.push(edgeMat);
+    l.edgeMat = edgeMat;
 
-    const p1 = new THREE.Vector3(W / 2, y, W / 6);
-    const p2 = new THREE.Vector3(W / 2 + 1.0, y, W / 6);
-    const leadMat = new THREE.LineBasicMaterial({ color: muted(), transparent: true, opacity: 0.6 });
-    group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([p1, p2]), leadMat));
-    mutedMats.push(leadMat);
-    anchors.push(p2);
+    // leader line (drawn on during the label phase)
+    const a = new THREE.Vector3(W / 2, y, W / 6);
+    const b = new THREE.Vector3(W / 2 + 1.0, y, W / 6);
+    const leadMat = new THREE.LineBasicMaterial({ color: muted(), transparent: true, opacity: 0 });
+    const lead = new THREE.Line(segGeom(a, b, 10), leadMat);
+    lead.geometry.setDrawRange(0, 0);
+    group.add(lead); mutedMats.push(leadMat);
+    leaders.push({ line: lead, verts: 11 });
+    anchors.push(b);
 
     const el = document.createElement('div');
     el.className = 'iso-label';
     el.innerHTML = `<span class="tier">${l.tier}</span>`;
     labelWrap.appendChild(el);
     l._el = el;
-  });
 
-  // corner posts tying the stack together
-  const postMat = new THREE.LineBasicMaterial({ color: accent(), transparent: true, opacity: 0.22 });
-  accentMats.push(postMat);
-  [[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([sx, sz]) => {
-    const g = new THREE.BufferGeometry().setFromPoints([
-      new THREE.Vector3(sx * W / 2, topY, sz * W / 2),
-      new THREE.Vector3(sx * W / 2, botY, sz * W / 2),
-    ]);
-    group.add(new THREE.Line(g, postMat));
+    // corner connectors between this tile and the one above it
+    if (i > 0){
+      const yAbove = topY - (i - 1) * GAP;
+      [[1, 1], [1, -1], [-1, 1], [-1, -1]].forEach(([sx, sz]) => {
+        const p = new THREE.Vector3(sx * W / 2, yAbove, sz * W / 2);
+        const q = new THREE.Vector3(sx * W / 2, y, sz * W / 2);
+        const cMat = new THREE.LineBasicMaterial({ color: accent(), transparent: true, opacity: 0 });
+        const cLine = new THREE.Line(segGeom(p, q, 6), cMat);
+        cLine.geometry.setDrawRange(0, 0);
+        group.add(cLine); accentMats.push(cMat);
+        connectors.push({ line: cLine, mat: cMat, verts: 7, gap: i });
+      });
+    }
   });
 
   // ---- interaction: drag to rotate ----
-  let rotY = -0.4, rotX = 0;
+  let rotY = -0.85, rotX = 0.14;
   const targetRot = { y: -0.4, x: 0 };
   let dragging = false, px = 0, py = 0;
+  let forceDone = false;
+  const skipIntro = () => { forceDone = true; };
 
   canvas.style.cursor = 'grab';
   canvas.addEventListener('pointerdown', (e) => {
     dragging = true; px = e.clientX; py = e.clientY;
     canvas.style.cursor = 'grabbing';
     canvas.setPointerCapture(e.pointerId);
+    skipIntro();
   });
   const endDrag = () => { dragging = false; canvas.style.cursor = 'grab'; };
   canvas.addEventListener('pointerup', endDrag);
@@ -228,9 +249,10 @@ const muted  = () => cssColor('--fg-muted', '#4c6883');
     const r = rectOf();
     layers.forEach((l, i) => {
       tmp.copy(anchors[i]).applyMatrix4(group.matrixWorld).project(camera);
-      const x = Math.min((tmp.x * 0.5 + 0.5) * r.width, r.width - 90);
+      const x = Math.min((tmp.x * 0.5 + 0.5) * r.width, r.width - 88);
       const y = (-tmp.y * 0.5 + 0.5) * r.height;
-      l._el.style.transform = `translate(${x}px, ${y - 9}px)`;
+      l._el.style.left = x + 'px';
+      l._el.style.top = (y - 9) + 'px';
     });
   }
 
@@ -255,13 +277,75 @@ const muted  = () => cssColor('--fg-muted', '#4c6883');
     attributes: true, attributeFilter: ['data-theme']
   });
 
+  // ---- intro timeline: tiles fly in, connectors draw, then labels reveal ----
+  const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+  const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+
+  const SLAB_STAGGER = 0.18, SLAB_DUR = 0.52, CONN_DUR = 0.3;
+  const LABEL_START = (n - 1) * SLAB_STAGGER + SLAB_DUR + 0.12;
+  const LABEL_STAGGER = 0.14, LABEL_DUR = 0.45;
+  const INTRO_END = LABEL_START + (n - 1) * LABEL_STAGGER + LABEL_DUR + 0.1;
+
+  let armed = REDUCE_MOTION;
+  let introT0 = null;
+  let introDone = REDUCE_MOTION;
+
+  if (!REDUCE_MOTION && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) { armed = true; io.disconnect(); }
+    }, { threshold: 0.2 });
+    io.observe(canvas);
+    setTimeout(() => { armed = true; }, 1500);   // safety net
+  } else {
+    armed = true;
+  }
+
+  function applyIntro(p){
+    layers.forEach((l, i) => {
+      const sp = clamp01((p - i * SLAB_STAGGER) / SLAB_DUR);
+      const e = easeOut(sp);
+      l.slab.position.set(DROP.x * (1 - e), l.baseY + DROP.y * (1 - e), DROP.z * (1 - e));
+      l.edges.position.copy(l.slab.position);
+      const s = 0.9 + 0.1 * e;
+      l.slab.scale.setScalar(s);
+      l.edges.scale.setScalar(s);
+      l.fillMat.opacity = FILL_O * e;
+      l.edgeMat.opacity = EDGE_O * e;
+
+      const lp = clamp01((p - (LABEL_START + i * LABEL_STAGGER)) / LABEL_DUR);
+      const le = easeOut(lp);
+      leaders[i].line.geometry.setDrawRange(0, lp > 0 ? Math.round(le * (leaders[i].verts - 1)) + 1 : 0);
+      leaders[i].line.material.opacity = LEAD_O * clamp01(lp * 2);
+      l._el.style.opacity = lp.toFixed(3);
+      l._el.style.transform = 'translateX(' + (12 * (1 - le)).toFixed(1) + 'px)';
+    });
+
+    connectors.forEach((c) => {
+      const cp = clamp01((p - (c.gap * SLAB_STAGGER + SLAB_DUR * 0.55)) / CONN_DUR);
+      c.line.geometry.setDrawRange(0, cp > 0 ? Math.round(easeOut(cp) * (c.verts - 1)) + 1 : 0);
+      c.mat.opacity = CONN_O * clamp01(cp * 3);
+    });
+  }
+
   const clock = new THREE.Clock();
   (function tick(){
     const t = clock.getElapsedTime();
-    const idle = (!REDUCE_MOTION && !dragging) ? Math.sin(t * 0.15) * 0.12 : 0;
 
-    rotY += ((targetRot.y + idle) - rotY) * 0.09;
-    rotX += (targetRot.x - rotX) * 0.09;
+    if (REDUCE_MOTION || forceDone){
+      applyIntro(INTRO_END + 1);
+      introDone = true;
+    } else if (armed){
+      if (introT0 === null) introT0 = t;
+      const p = t - introT0;
+      applyIntro(p);
+      if (p >= INTRO_END) introDone = true;
+    } else {
+      applyIntro(-1);
+    }
+
+    const idle = (introDone && !REDUCE_MOTION && !dragging) ? Math.sin(t * 0.15) * 0.12 : 0;
+    rotY += ((targetRot.y + idle) - rotY) * 0.06;
+    rotX += (targetRot.x - rotX) * 0.06;
     group.rotation.set(rotX, rotY, 0);
     pivot.updateMatrixWorld(true);
 
